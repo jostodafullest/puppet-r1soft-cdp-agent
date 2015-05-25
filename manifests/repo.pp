@@ -10,13 +10,18 @@ class serverbackup_cdp_agent::repo {
             }
         }
         ubuntu, debian: {
+		include apt
             apt::source { 'r1soft-stable':
                 location    => 'http://repo.r1soft.com/apt',
                 release     => 'stable',
                 repos       => 'main',
-                include_src => false,
-                key         => 'B1D53877',
-                key_source  => 'http://repo.r1soft.com/r1soft.asc',
+		include => { 
+		 'src' => false,
+		 },
+                key         =>  {
+		'id'	=> 'B1D53877',
+		'source' => 'http://repo.r1soft.com/r1soft.asc',
+		},
             }
         }
     }
